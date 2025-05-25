@@ -115,9 +115,7 @@
     {\large\bfseries\centering POLITEHNICA din București}
     
     {\large\centering Facultatea de Automatică și Calculatoare}
-    
-    {\large\centering Departamentul Automatică și Informatică Industrială}
-    
+        
     \vspace{3cm}
     
     {\Large\bfseries\centering Proiect - Protecția și Managementul Informației}
@@ -134,14 +132,18 @@
     {\large\bfseries Autor: Valentin PLETEA-MARINESCU, Facultatea de Automatică și
     Calculatoare, anul 3, Grupa 332AB \par}
     {\large\bfseries Adresă email: pletea.valentin2003@gmail.com \par}
-    {\large\bfseries Îndrumător științific: [Nume Profesor]\par}
     
     \vspace{1cm}
     
-    {\large\centering \today}
 \end{titlepage}
 
-\hypersetup{linkcolor=black}
+\hypersetup{
+    colorlinks=false,
+    linkcolor=black,
+    filecolor=black,      
+    urlcolor=black,
+    hidelinks
+}
 \tableofcontents
 \newpage
 
@@ -261,43 +263,58 @@ Aceste statistici evidențiază necesitatea unei abordări ponderate care să pr
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=0.8]
-% Cadru principal
-\draw[thick, black] (0,0) rectangle (12,8);
+\begin{tikzpicture}[scale=1.0]
+% Cadru principal - mult mai mare
+\draw[thick, black] (0,0) rectangle (18,12);
 
-% Header
-\fill[black!10] (0.2,6.5) rectangle (11.8,7.8);
-\node[font=\Large\bfseries] at (6,7.15) {EMBEDDED SECURITY LABEL};
+% Header - mai înalt și mai aerisit
+\fill[black!10] (0.3,10.5) rectangle (17.7,11.7);
+\node[font=\Large\bfseries] at (9,11.1) {EMBEDDED SECURITY LABEL};
 
-% Scor principal
-\fill[black!20] (0.5,5) rectangle (5.5,6.3);
-\node[font=\Huge\bfseries] at (3,5.65) {B+};
-\node[font=\large] at (3,5.2) {Scor: 73.2/100};
+% Scor principal - secțiune mare și vizibilă
+\fill[red!15] (0.8,8.5) rectangle (8,10.2);
+\node[font=\Huge\bfseries, color=red!80] at (4.4,9.6) {F};
+\node[font=\normalsize] at (4.4,9.0) {Scor: 50.2/100};
+\node[font=\scriptsize] at (4.4,8.7) {Nesatisfăcător};
 
-% Detalii componente
-\node[font=\bfseries] at (8.5,6) {Componente Principale:};
-\node[align=left] at (8.5,5.3) {CVE Analysis: 68/100};
-\node[align=left] at (8.5,4.9) {Code Coverage: 75/100};
-\node[align=left] at (8.5,4.5) {Static Analysis: 78/100};
-\node[align=left] at (8.5,4.1) {Dynamic Analysis: 71/100};
+% Detalii componente - mai mult spațiu între linii
+\node[font=\Large\bfseries] at (13,9.8) {Componente Principale:};
+\node[font=\normalsize] at (13,9.3) {CVE Analysis: 50.9/100};
+\node[font=\normalsize] at (13,8.9) {Code Coverage: 49.6/100};
+\node[font=\normalsize] at (13,8.5) {Static Analysis: 49.5/100};
+\node[font=\normalsize] at (13,8.1) {Dynamic Analysis: 50.3/100};
 
-% Indicator risc
-\fill[black!15] (0.5,3.2) rectangle (11.5,4.2);
-\node[font=\bfseries] at (2,3.7) {Risc Moderat};
-\node[align=left] at (8,3.7) {156 pachete cu vulnerabilitati critice};
+% Statistici critice - secțiune mare cu spațiu generos
+\fill[red!10] (0.8,6.0) rectangle (17.2,7.8);
+\node[font=\Large\bfseries, color=red!80] at (3,7.4) {Risc Critic};
+\node[font=\normalsize] at (10.5,7.4) {508 pachete critice (scor < 30)};
+\node[font=\normalsize] at (10.5,7.0) {38 pachete cu CVE Score = 0};
+\node[font=\normalsize] at (10.5,6.6) {54 pachete netestrate (Coverage = 0)};
+\node[font=\normalsize] at (10.5,6.2) {Total analizate: 4,601 pachete};
 
-% Recomandări
-\node[font=\bfseries] at (6,2.8) {Recomandări Prioritare:};
-\node[align=left, font=\small] at (6,2.1) {1. Actualizare pachete cu CVE Score < 20};
-\node[align=left, font=\small] at (6,1.8) {2. Îmbunătățire acoperire teste};
-\node[align=left, font=\small] at (6,1.5) {3. Remediere vulnerabilități critice};
+% Recomandări prioritare - spațiu foarte generos
+\node[font=\Large\bfseries] at (9,5.5) {Recomandări Prioritare:};
+\node[font=\normalsize] at (9,5.0) {1. Remediere imediată 38 pachete cu CVE = 0};
+\node[font=\normalsize] at (9,4.6) {2. Îmbunătățire testare pentru 2,285 pachete};
+\node[font=\normalsize] at (9,4.2) {3. Analiza statică pentru 1,887 pachete};
+\node[font=\normalsize] at (9,3.8) {4. Audit complet pachete critice};
 
-% Footer
-\fill[gray!20] (0.2,0.2) rectangle (11.8,1.2);
-\node[font=\small] at (6,0.7) {AGL Demo Platform - Raspberry Pi 4 | Data: \today};
+% Statistici rezumat - bandă finală cu informații esențiale
+\fill[gray!15] (0.8,2.0) rectangle (17.2,3.5);
+\node[font=\normalsize\bfseries] at (3.5,3.0) {Media CVE: 50.9};
+\node[font=\normalsize\bfseries] at (7.5,3.0) {Media Coverage: 49.6\%};
+\node[font=\normalsize\bfseries] at (12,3.0) {Pachete Critice: 11.0\%};
+\node[font=\normalsize\bfseries] at (15,3.0) {Nota: F};
+\node[font=\small] at (9,2.4) {Sistem cu vulnerabilități majore - acțiune imediată necesară};
+
+% Footer - mai mult spațiu pentru informații
+\fill[gray!20] (0.3,0.3) rectangle (17.7,1.7);
+\node[font=\normalsize\bfseries] at (9,1.3) {AGL Demo Platform - Raspberry Pi 4};
+\node[font=\small] at (9,0.9) {Analiză bazată pe OpenSSF Criticality Score};
+\node[font=\small] at (9,0.5) {Formula adaptată pentru embedded security | Data: \today};
 
 \end{tikzpicture}
-\caption{Model de Etichetă de Securitate pentru Produse Embedded}
+\caption{Etichetă de Securitate pentru AGL Demo Platform - Rezultate Reale}
 \end{figure}
 
 \subsection{Explicația Elementelor Vizuale}
@@ -400,11 +417,12 @@ Aceasta metrica este deosebit de importanta in sistemele embedded, unde componen
 
 \subsection{Script de Calculare}
 
-\begin{lstlisting}[language=Python, caption=Script pentru calcularea scorului de securitate, label=lst:security_calculator]
+\begin{lstlisting}[language=Python, caption=Script real pentru calcularea scorului de securitate (security\_calculator.py), label=lst:real_security_calculator]
 #!/usr/bin/env python3
 """
 Script pentru calcularea scorului de securitate pentru produse embedded.
-Bazat pe principiile OpenSSF Criticality Score, adaptat pentru embedded security.
+Bazat pe principiile OpenSSF Criticality Score, adaptat pentru embedded 
+security.
 """
 
 import pandas as pd
@@ -412,6 +430,7 @@ import numpy as np
 import json
 from datetime import datetime
 import logging
+import os
 
 class EmbeddedSecurityCalculator:
     def __init__(self, config_file='config.json'):
@@ -425,6 +444,8 @@ class EmbeddedSecurityCalculator:
             with open(config_file, 'r') as f:
                 self.config = json.load(f)
         except FileNotFoundError:
+            print(f"Fisierul {config_file} nu a fost gasit. Folosesc 
+            configuratia implicita.")
             # Configuratie implicita
             self.config = {
                 "weights": {
@@ -437,6 +458,11 @@ class EmbeddedSecurityCalculator:
                     "dependency_weight": 0.6,
                     "usage_weight": 0.4,
                     "temporal_decay": 0.1
+                },
+                "thresholds": {
+                    "critical_score": 30,
+                    "warning_score": 60,
+                    "excellent_score": 90
                 }
             }
     
@@ -465,10 +491,14 @@ class EmbeddedSecurityCalculator:
         weights = self.config["weights"]
         
         score = (
-            package_data['CVE Analysis Safety'] * weights['cve_analysis_safety'] +
-            package_data['Code Coverage'] * weights['code_coverage'] +
-            package_data['Static Code Analysis Status'] * weights['static_analysis'] +
-            package_data['Dynamic Program Analysis Status'] * weights['dynamic_analysis']
+            package_data['CVE Analysis Safety'] * 
+            weights['cve_analysis_safety'] +
+            package_data['Code Coverage'] * 
+            weights['code_coverage'] +
+            package_data['Static Code Analysis Status'] * 
+            weights['static_analysis'] +
+            package_data['Dynamic Program Analysis Status'] * 
+            weights['dynamic_analysis']
         )
         
         return min(100, max(0, score))
@@ -476,7 +506,8 @@ class EmbeddedSecurityCalculator:
     def calculate_system_score(self, csv_file):
         """
         Calculeaza scorul de securitate pentru intregul sistem.
-        Bazat pe adaptarea algoritmului original_pike.yml pentru embedded security.
+        Bazat pe adaptarea algoritmului original_pike.yml pentru embedded 
+        security.
         """
         self.logger.info(f"Incepe calculul pentru {csv_file}")
         
@@ -501,7 +532,8 @@ class EmbeddedSecurityCalculator:
         weighted_score = self.apply_criticality_weights(df)
         
         # Identificarea pachetelor critice
-        critical_packages = df[df['Package_Score'] < 30]
+        critical_packages = df[df['Package_Score'] < 
+        self.config["thresholds"]["critical_score"]]
         vulnerable_packages = df[df['CVE Analysis Safety'] == 0]
         untested_packages = df[df['Code Coverage'] == 0]
         
@@ -512,17 +544,22 @@ class EmbeddedSecurityCalculator:
             'critical_packages': len(critical_packages),
             'vulnerable_packages': len(vulnerable_packages),
             'untested_packages': len(untested_packages),
-            'worst_packages': critical_packages.nsmallest(10, 'Package_Score'),
+            'worst_packages': critical_packages.nsmallest(10,
+            'Package_Score'),
             'statistics': self.calculate_statistics(df),
-            'recommendations': self.generate_recommendations(df)
+            'recommendations': self.generate_recommendations(df),
+            'grade': self.calculate_grade(system_score)
         }
         
-        self.logger.info(f"Calculul finalizat: Scor sistem = {results['system_score']}")
+        self.logger.info(f"Calculul finalizat: Scor sistem = 
+        {results['system_score']}")
         return results
     
     def calculate_pdci(self, df):
         """Calculeaza Package Dependency Criticality Index."""
-        # Simulam calculul dependintelor (in practica ar veni din package manager)
+        # Simulam calculul dependintelor (in practica ar veni din 
+        package manager)
+        np.random.seed(42)  # Pentru rezultate consistente
         dependencies = np.random.randint(0, 50, len(df))
         usage_freq = np.random.randint(0, 100, len(df))
         max_usage = usage_freq.max() if len(usage_freq) > 0 else 1
@@ -556,8 +593,30 @@ class EmbeddedSecurityCalculator:
                 'std': round(df['Code Coverage'].std(), 1),
                 'min': df['Code Coverage'].min(),
                 'max': df['Code Coverage'].max()
+            },
+            'static_analysis_stats': {
+                'mean': round(df['Static Code Analysis Status'].mean(), 1),
+                'std': round(df['Static Code Analysis Status'].std(), 1)
+            },
+            'dynamic_analysis_stats': {
+                'mean': round(df['Dynamic Program Analysis Status'].mean(),
+                1),
+                'std': round(df['Dynamic Program Analysis Status'].std(), 1)
             }
         }
+    
+    def calculate_grade(self, score):
+        """Calculeaza nota alfabetica bazata pe scor."""
+        if score >= 90:
+            return 'A'
+        elif score >= 80:
+            return 'B'
+        elif score >= 70:
+            return 'C'
+        elif score >= 60:
+            return 'D'
+        else:
+            return 'F'
     
     def generate_recommendations(self, df):
         """Genereaza recomandari bazate pe analiza datelor."""
@@ -575,35 +634,67 @@ class EmbeddedSecurityCalculator:
         if low_coverage > 0:
             recommendations.append({
                 'priority': 'RIDICATA',
-                'action': f'Imbunatatiti testarea pentru {low_coverage} pachete cu coverage < 50%',
+                'action': f'Imbunatatiti testarea pentru {low_coverage} pachete 
+                cu coverage < 50%',
                 'impact': 'Reducerea riscului de vulnerabilitati nedetectate'
+            })
+        
+        low_static = len(df[df['Static Code Analysis Status'] < 40])
+        if low_static > 0:
+            recommendations.append({
+                'priority': 'MEDIE',
+                'action': f'Imbunatatiti analiza statica pentru {low_static} 
+                pachete',
+                'impact': 'Detectarea preventiva a problemelor de cod'
             })
         
         return recommendations
 
-# Exemplu de utilizare
-if __name__ == "__main__":
+def main():
+    """Functia principala pentru rularea calculatorului."""
+    print("=== Calculator Securitate Embedded ===")
+    print()
+    
+    # Initializare calculator
     calculator = EmbeddedSecurityCalculator()
-    results = calculator.calculate_system_score(
-        'packageanalysis_agldemoplatform_raspberrypi464.csv'
-    )
+    
+    # Nume fisier CSV real
+    csv_file = 'package-analysis_agl-demo-platform_raspberrypi4-64.csv'
+    
+    # Verifica daca fisierul CSV exista
+    if not os.path.exists(csv_file):
+        print(f"EROARE: Fisierul {csv_file} nu a fost gasit!")
+        return
+    
+    # Calculeaza scorul
+    results = calculator.calculate_system_score(csv_file)
     
     if results:
-        print(f"Scor sistem: {results['system_score']}/100")
-        print(f"Scor ponderat: {results['weighted_score']}/100")
+        print(f"Scor sistem: {results['system_score']}/100 (Nota:
+        {results['grade']})")
+        print(f"Total pachete: {results['total_packages']:,}")
         print(f"Pachete critice: {results['critical_packages']}")
         print(f"Pachete vulnerabile: {results['vulnerable_packages']}")
         
-        # Salveaza rezultatele intr-un fisier JSON pentru analiza ulterioara
-        output_file = f"security_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        with open(output_file, 'w') as f:
-            # Converteste DataFrame-urile in dictionare pentru serializare JSON
-            results_copy = results.copy()
-            if 'worst_packages' in results_copy:
-                results_copy['worst_packages'] = results_copy['worst_packages'].to_dict('records')
-            json.dump(results_copy, f, indent=2, default=str)
+        # Exporta rezultatele
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"security_analysis_{timestamp}.json"
         
-        print(f"Rezultatele au fost salvate in {output_file}")
+        results_copy = results.copy()
+        if 'worst_packages' in results_copy:
+            results_copy['worst_packages'] = results_copy['worst_packages'].
+            to_dict('records')
+        
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(results_copy, f, indent=2, default=str, 
+            ensure_ascii=False)
+        
+        print(f"Rezultatele salvate in: {filename}")
+    else:
+        print("Eroare la calcularea scorurilor!")
+
+if __name__ == "__main__":
+    main()
 \end{lstlisting}
 
 \subsection{Adaptări față de original\_pike.yml}
@@ -639,24 +730,27 @@ Aplicarea formulei propuse asupra dataset-ului AGL Demo Platform oferă următoa
 \toprule
 \textbf{Metric} & \textbf{Valoare} \\
 \midrule
-Scor Global Sistem & 67.3/100 \\
-Scor Ponderat (cu PDCI) & 71.8/100 \\
+Scor Global Sistem & 50.2/100 \\
+Scor Ponderat (cu PDCI) & 50.2/100 \\
 Total Pachete Analizate & 4,601 \\
-Pachete Critice (Scor < 30) & 287 (6.2\%) \\
-Pachete cu CVE Score = 0 & 156 (3.4\%) \\
-Pachete cu Coverage = 0 & 89 (1.9\%) \\
-Media Code Coverage & 61.7\% \\
-Deviația Standard CVE & 28.4 \\
-Pachete cu Risc Temporal Ridicat & 423 (9.2\%) \\
+Pachete Critice (Scor < 30) & 508 (11.0\%) \\
+Pachete cu CVE Score = 0 & 38 (0.8\%) \\
+Pachete cu Coverage = 0 & 54 (1.2\%) \\
+Media CVE Analysis Safety & 50.9 \\
+Media Code Coverage & 49.6\% \\
+Media Static Analysis & 49.5 \\
+Media Dynamic Analysis & 50.3 \\
+Deviația Standard CVE & 29.4 \\
+Pachete sub 50\% Coverage & 2,285 (49.7\%) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \textbf{Interpretarea rezultatelor:}
 
-Scorul global de 67.3 plasează sistemul AGL Demo în categoria \textbf{C (Satisfăcător)}, indicând o securitate acceptabilă dar cu necesități clare de îmbunătățire. Scorul ponderat mai ridicat (71.8) sugerează că pachetele critice au în general scoruri mai bune, reducând riscul global.
+Scorul global de 50.2 plasează sistemul AGL Demo în categoria \textbf{F (Nesatisfăcător)}, indicând probleme majore de securitate care necesită atenție imediată. Acest scor reflectă vulnerabilitățile critice și acoperirea insuficientă de teste.
 
-Procentajul relativ scăzut de pachete critice (6.2\%) este encourageant, dar cele 156 de pachete cu CVE Score = 0 reprezintă o preocupare majoră, necesitând atenție imediată.
+Procentajul ridicat de pachete critice (11.0\%) este îngrijorător și indică probleme sistemice în procesele de dezvoltare și testare. Cele 38 de pachete cu CVE Score = 0 reprezintă o preocupare majoră, necesitând atenție imediată.
 
 \begin{warningbox}
 \textbf{Pachete cu Risc Maxim identificate în analiza AGL Demo Platform:}
@@ -672,9 +766,9 @@ Aceste componente necesită atenție imediată și prioritizare în planul de re
 
 \textbf{Analiza statistică detaliată:}
 
-Distribuția scorurilor CVE prezintă o deviație standard ridicată (28.4), indicând o variabilitate mare în calitatea securității între pachete. Această eterogenitate sugerează că unele componente au fost dezvoltate cu standarde de securitate stricte, în timp ce altele au primit mai puțină atenție.
+Distribuția scorurilor CVE prezintă o deviație standard de 29.4, indicând o variabilitate foarte mare în calitatea securității între pachete. Această eterogenitate sugerează lipsa unor standarde uniforme de dezvoltare securizată în ecosistemul AGL.
 
-Media code coverage de 61.7\% este în linia cu standardele industriei pentru proiecte open source, dar sub pragul recomandat de 80\% pentru sistemele critice embedded.
+Media code coverage de 49.6\% este sub standardele industriei și cu mult sub pragul recomandat de 80\% pentru sistemele critice embedded. Aproape jumătate din pachete (2,285) au coverage sub 50\%, indicând probleme sistemice în procesele de testare.
 
 \section{Concluzii}
 
@@ -887,6 +981,16 @@ Exemplu de fișier \texttt{config.json} pentru personalizarea calculului:
 \item Validarea practică a metodologiei pe platformă industrială (AGL)
 \end{itemize}
 
-Această metodologie reprezintă o contribuție semnificativă la domeniul securității software embedded, oferind o bază solidă pentru standardizarea evaluării riscurilor și luarea deciziilor informate în managementul securității produselor embedded.
+Prin analiza concretă a ecosistemului AGL Demo Platform, am identificat vulnerabilități semnificative care necesită atenție imediată. Scorul de 50.2/100 (nota F) indică faptul că sistemul prezintă riscuri majore de securitate.
+
+Principalele probleme identificate includ:
+\begin{itemize}
+\item 508 pachete critice (11\% din total) cu scoruri sub 30
+\item Media code coverage de doar 49.6\%, sub standardele industriei
+\item 2,285 pachete (aproape jumătate) cu acoperire de teste sub 50\%
+\item Distribuția inegală a calității securității în ecosistem
+\end{itemize}
+
+Rezultatele arată necesitatea urgentă de îmbunătățire a proceselor de dezvoltare securizată și implementare a unor standarde uniforme de calitate în întregul ecosistem AGL.
 
 \end{document}
