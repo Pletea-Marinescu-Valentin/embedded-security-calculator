@@ -104,6 +104,9 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
 
+\usepackage[backend=biber,style=ieee,sorting=ynt]{biblatex}
+\addbibresource{bibliografie.bib}
+
 \begin{document}
 
 \begin{titlepage}
@@ -149,17 +152,17 @@
 
 \section{Introducere}
 
-Produsele embedded sunt omniprezente în infrastructura modernă, de la sistemele automotive până la dispozitivele IoT industriale. Evaluarea securității acestor sisteme reprezintă o provocare complexă din cauza diversității componentelor software și a dependințelor multiple.
+Produsele embedded sunt omniprezente în infrastructura modernă, de la sistemele automotive până la dispozitivele IoT industriale. Evaluarea securității acestor sisteme reprezintă o provocare complexă din cauza diversității componentelor software și a dependințelor multiple \cite{nguyen2020security,cui2013embedded}.
 
-Această lucrare propune o formulă adaptată pentru etichetarea securității produselor embedded, bazându-se pe principiile OpenSSF Criticality Score și pe analiza unui dataset real de 4,601 pachete din platforma AGL Demo pentru Raspberry Pi 4.
+Această lucrare propune o formulă adaptată pentru etichetarea securității produselor embedded, bazându-se pe principiile OpenSSF Criticality Score \cite{openssf2021criticality} și pe analiza unui dataset real de 4,601 pachete din platforma AGL Demo pentru Raspberry Pi 4.
 
-\textbf{Scopul acestei teme} este să dezvolte o metodă obiectivă de evaluare a securității care să combine multiple dimensiuni de analiză: acoperirea codului, vulnerabilitățile cunoscute (CVE), analiza statică și dinamică a codului.
+\textbf{Scopul acestei teme} este să dezvolte o metodă obiectivă de evaluare a securității care să combine multiple dimensiuni de analiză: acoperirea codului, vulnerabilitățile cunoscute (CVE), analiza statică și dinamică a codului \cite{scandariato2015static,chowdhury2018comparative}.
 
 \subsection{Contextul și relevanța temei}
 
-În contextul creșterii amenințărilor de securitate cibernetică, evaluarea riscurilor pentru produsele embedded devine din ce în ce mai critică. Studii recente arată că sistemele embedded sunt deosebit de vulnerabile din cauza ciclurilor lungi de dezvoltare și a dificultății în aplicarea patch-urilor de securitate.
+În contextul creșterii amenințărilor de securitate cibernetică, evaluarea riscurilor pentru produsele embedded devine din ce în ce mai critică \cite{checkoway2011comprehensive,miller2015remote}. Studii recente arată că sistemele embedded sunt deosebit de vulnerabile din cauza ciclurilor lungi de dezvoltare și a dificultății în aplicarea patch-urilor de securitate \cite{alves2016towards}.
 
-Platforma AGL (Automotive Grade Linux) reprezintă un exemplu relevant de ecosistem embedded complex, utilizat în industria automotive și în diverse aplicații IoT. Analiza celor 4,601 pachete din acest ecosistem oferă o perspectivă realistă asupra provocărilor de securitate din domeniul embedded.
+Platforma AGL (Automotive Grade Linux) reprezintă un exemplu relevant de ecosistem embedded complex, utilizat în industria automotive și în diverse aplicații IoT \cite{agl2021platform}. Analiza celor 4,601 pachete din acest ecosistem oferă o perspectivă realistă asupra provocărilor de securitate din domeniul embedded \cite{koopman2010better}.
 
 \subsection{Obiectivele proiectului}
 
@@ -222,9 +225,9 @@ unde valorile implicite sunt:
 
 \subsection{Raționamentul pentru Formula}
 
-\textbf{Inspirația din OpenSSF Criticality Score:} Am adaptat algoritmul Rob Pike pentru contextul specific al securității embedded, păstrând principiul ponderării diferențiate a factorilor, dar ajustând ponderile pentru a reflecta prioritățile specifice sistemelor embedded.
+\textbf{Inspirația din OpenSSF Criticality Score:} Am adaptat algoritmul Rob Pike \cite{pike2019criticality} pentru contextul specific al securității embedded, păstrând principiul ponderării diferențiate a factorilor, dar ajustând ponderile pentru a reflecta prioritățile specifice sistemelor embedded.
 
-\textbf{Analiza Datelor Empirice:} Din cele 4,601 pachete analizate din platforma AGL Demo:
+\textbf{Analiza Datelor Empirice:} Ecosistemul de dependințe software prezintă riscuri semnificative, cu studii arătând că vulnerabilitățile se propagă rapid prin lanțul de aprovizionare \cite{zimmermann2019small,decan2018impact,ohm2020backstabbers}. Din cele 4,601 pachete analizate din platforma AGL Demo:
 
 \begin{itemize}
 \item 156 pachete au CVE Analysis Safety = 0 (vulnerabilități critice) - reprezentând 3.4\% din total
@@ -358,7 +361,7 @@ unde:
 \end{itemize}
 \end{infobox}
 
-\textbf{Justificare științifică:} Cercetările în domeniul analizei dependințelor software arată că pachetele cu multe dependințe (high fan-in) sau foarte utilizate (high fan-out) au impact disproporționat asupra securității globale. Funcția logaritmică pentru dependințe previne dominarea scorului de către pachete cu foarte multe dependințe, în timp ce normalizarea frecvenței de utilizare asigură comparabilitatea între ecosisteme de dimensiuni diferite.
+\textbf{Justificare științifică:} Cercetările în domeniul analizei dependințelor software arată că pachetele cu multe dependințe (high fan-in) sau foarte utilizate (high fan-out) au impact disproporționat asupra securității globale \cite{cox2019surviving,decan2018impact}. Funcția logaritmică pentru dependințe previne dominarea scorului de către pachete cu foarte multe dependințe, în timp ce normalizarea frecvenței de utilizare asigură comparabilitatea între ecosisteme de dimensiuni diferite.
 
 Un pachet cu 100 de dependințe care este compromis poate afecta întreg sistemul prin propagarea vulnerabilităților. Această proprietate este deosebit de relevantă în sistemele embedded unde actualizările selective sunt dificile.
 
@@ -717,7 +720,7 @@ Algoritmul Rob Pike original pentru Criticality Score se concentrează pe proiec
 
 \textbf{Justificare științifică pentru adaptări:}
 
-Cercetările în domeniul securității embedded demonstrează că metodologiile tradiționale de evaluare a riscului, dezvoltate pentru software desktop sau web, nu sunt adecvate pentru sistemele embedded. Specificul acestor sisteme (resurse limitate, cicluri de viață lungi, dificultatea actualizărilor) necesită o abordare adaptată care să prioritizeze diferit factorii de risc.
+Cercetările în domeniul securității embedded demonstrează că metodologiile tradiționale de evaluare a riscului, dezvoltate pentru software desktop sau web, nu sunt adecvate pentru sistemele embedded \cite{yasasin2020security,neutatz2019automated}. Specificul acestor sisteme (resurse limitate, cicluri de viață lungi, dificultatea actualizărilor) necesită o abordare adaptată care să prioritizeze diferit factorii de risc.
 
 \subsection{Rezultate pentru AGL Demo Platform}
 
@@ -861,8 +864,7 @@ Implementarea acestei metodologii la nivel industrial poate contribui la crește
 
 \newpage
 
-\appendix
-\section{Date de Referință și Implementare}
+\section{Implementare}
 
 \subsection{Distribuția Scorurilor în Dataset}
 
@@ -890,39 +892,39 @@ Exemplu de fișier \texttt{config.json} pentru personalizarea calculului:
 
 \begin{lstlisting}[language=, caption=Configurația completă pentru calculatorul de securitate]
 {
-  "weights": {
-    "cve_analysis_safety": 0.40,
-    "code_coverage": 0.25,
-    "static_analysis": 0.20,
-    "dynamic_analysis": 0.15
-  },
-  "bonus_factors": {
-    "dependency_weight": 0.6,
-    "usage_weight": 0.4,
-    "temporal_decay": 0.1,
-    "license_risk_enabled": true,
-    "component_interaction_enabled": false
-  },
-  "thresholds": {
-    "critical_score": 30,
-    "warning_score": 60,
-    "excellent_score": 90
-  },
-  "reporting": {
-    "formats": ["html", "json", "csv"],
-    "include_recommendations": true,
-    "include_statistics": true,
-    "output_directory": "./reports"
-  },
-  "validation": {
-    "min_packages": 10,
-    "required_metrics": [
-      "CVE Analysis Safety",
-      "Code Coverage",
-      "Static Code Analysis Status",
-      "Dynamic Program Analysis Status"
-    ]
-  }
+    "weights": {
+        "cve_analysis_safety": 0.40,
+        "code_coverage": 0.25,
+        "static_analysis": 0.20,
+        "dynamic_analysis": 0.15
+    },
+    "bonus_factors": {
+        "dependency_weight": 0.6,
+        "usage_weight": 0.4,
+        "temporal_decay": 0.1,
+        "license_risk_enabled": true,
+        "component_interaction_enabled": false
+    },
+    "thresholds": {
+        "critical_score": 30,
+        "warning_score": 60,
+        "excellent_score": 90
+    },
+    "reporting": {
+        "formats": ["html", "json", "csv"],
+        "include_recommendations": true,
+        "include_statistics": true,
+        "output_directory": "./reports"
+    },
+    "validation": {
+        "min_packages": 10,
+        "required_metrics": [
+        "CVE Analysis Safety",
+        "Code Coverage",
+        "Static Code Analysis Status",
+        "Dynamic Program Analysis Status"
+        ]
+    }
 }
 \end{lstlisting}
 
@@ -932,32 +934,32 @@ Exemplu de fișier \texttt{config.json} pentru personalizarea calculului:
 
 \begin{enumerate}
 \item \textbf{Faza de Pregătire (săptămâna 1-2):}
-   \begin{itemize}
-   \item Inventarierea tuturor componentelor software din produs
-   \item Colectarea metricilor existente (CVE, coverage, analize statice)
-   \item Instalarea și configurarea tool-urilor necesare
-   \end{itemize}
+    \begin{itemize}
+    \item Inventarierea tuturor componentelor software din produs
+    \item Colectarea metricilor existente (CVE, coverage, analize statice)
+    \item Instalarea și configurarea tool-urilor necesare
+    \end{itemize}
 
 \item \textbf{Faza de Calibrare (săptămâna 3-4):}
-   \begin{itemize}
-   \item Rularea calculatorului pe un subset reprezentativ
-   \item Ajustarea ponderilor bazată pe expertiza domeniului
-   \item Validarea rezultatelor cu echipa de securitate
-   \end{itemize}
+    \begin{itemize}
+    \item Rularea calculatorului pe un subset reprezentativ
+    \item Ajustarea ponderilor bazată pe expertiza domeniului
+    \item Validarea rezultatelor cu echipa de securitate
+    \end{itemize}
 
 \item \textbf{Faza de Implementare (săptămâna 5-8):}
-   \begin{itemize}
-   \item Integrarea în pipeline-ul de build existent
-   \item Configurarea alertelor pentru scoruri critice
-   \item Training pentru echipele de dezvoltare
-   \end{itemize}
+    \begin{itemize}
+    \item Integrarea în pipeline-ul de build existent
+    \item Configurarea alertelor pentru scoruri critice
+    \item Training pentru echipele de dezvoltare
+    \end{itemize}
 
 \item \textbf{Faza de Monitorizare (ongoing):}
-   \begin{itemize}
-   \item Monitorizarea trend-urilor de securitate
-   \item Raportare regulată către management
-   \item Îmbunătățire continuă bazată pe feedback
-   \end{itemize}
+    \begin{itemize}
+    \item Monitorizarea trend-urilor de securitate
+    \item Raportare regulată către management
+    \item Îmbunătățire continuă bazată pe feedback
+    \end{itemize}
 \end{enumerate}
 
 \subsection{Referințe și Standarde}
@@ -992,5 +994,7 @@ Principalele probleme identificate includ:
 \end{itemize}
 
 Rezultatele arată necesitatea urgentă de îmbunătățire a proceselor de dezvoltare securizată și implementare a unor standarde uniforme de calitate în întregul ecosistem AGL.
+
+\printbibliography[heading=bibintoc, title={Bibliografie}]
 
 \end{document}
