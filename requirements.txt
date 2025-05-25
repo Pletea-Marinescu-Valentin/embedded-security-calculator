@@ -1,0 +1,19 @@
+# Dependențe pentru Security Calculator - AGL Demo Platform Analysis
+# Core data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Logging și configurare
+python-dateutil>=2.8.0
+
+# Optional: Pentru analize mai avansate (dacă vrei să extinzi)
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.15.0
+
+# Pentru debugging și development
+ipython>=8.0.0
+
+# Asigurare compatibilitate
+setuptools>=65.0.0
+wheel>=0.40.0
