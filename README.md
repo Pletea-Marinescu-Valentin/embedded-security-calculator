@@ -71,6 +71,8 @@ python html_report_generator.py
 ```
 Generează un raport HTML profesional cu grafice și vizualizări.
 
+**Notă**: Asigură-te că fișierul CSV `package-analysis_agl-demo-platform_raspberrypi4-64.csv` este prezent în directorul principal înainte de a rula analiza.
+
 ## 📁 Structura Proiectului
 
 ```
@@ -85,7 +87,9 @@ embedded-security-calculator/
 ├── setup.sh               # Setup Linux/macOS
 ├── README.md             # Această documentație
 ├── .gitignore           # Fișiere ignorate de Git
-└── packageanalysis_agldemoplatform_raspberrypi464.csv  # Date AGL
+├── bibliografie.bib     # Bibliografie pentru documentația LaTeX
+├── Valentin_Pletea-Marinescu_332AB_tema-etichetare-securitate.tex  # Documentația completă
+└── package-analysis_agl-demo-platform_raspberrypi4-64.csv  # Date AGL
 ```
 
 ## 🔧 Configurare
@@ -124,11 +128,11 @@ Editează `config.json` pentru a personaliza:
 
 ```
 === REZULTATE ANALIZA SECURITATE AGL DEMO PLATFORM ===
-Scor sistem: 67.3/100 (Nota: C)
+Scor sistem: 50.2/100 (Nota: F)
 Total pachete analizate: 4,601
-Pachete critice: 287
-Pachete vulnerabile (CVE=0): 156
-Pachete netestrate (Coverage=0): 89
+Pachete critice (scor < 30): 508 (11.0%)
+Pachete vulnerabile (CVE=0): 38 (0.8%)
+Pachete netestrate (Coverage=0): 54 (1.2%)
 ```
 
 ### Top Pachete cu Risc Maxim
@@ -206,6 +210,7 @@ setup.bat   # Windows
 
 # 4. Rulează analiza
 source venv/bin/activate  # Linux/macOS
+venv\Scripts\activate     # Windows
 python security_calculator.py
 
 # 5. Vezi raportul HTML
