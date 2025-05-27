@@ -32,11 +32,6 @@ class EmbeddedSecurityCalculator:
                     "static_analysis": 0.20,
                     "dynamic_analysis": 0.15
                 },
-                "bonus_factors": {
-                    "dependency_weight": 0.6,
-                    "usage_weight": 0.4,
-                    "temporal_decay": 0.1
-                },
                 "thresholds": {
                     "critical_score": 30,
                     "warning_score": 60,
@@ -57,15 +52,7 @@ class EmbeddedSecurityCalculator:
         self.logger = logging.getLogger(__name__)
     
     def calculate_package_score(self, package_data):
-        """
-        Calculeaza scorul de securitate pentru un pachet individual.
-        
-        Args:
-            package_data: Dict cu metricile pachetului
-            
-        Returns:
-            float: Scorul calculat (0-100)
-        """
+        """Calculeaza scorul de securitate pentru un pachet individual."""
         weights = self.config["weights"]
         
         score = (
@@ -78,10 +65,7 @@ class EmbeddedSecurityCalculator:
         return min(100, max(0, score))
     
     def calculate_system_score(self, csv_file):
-        """
-        Calculeaza scorul de securitate pentru intregul sistem.
-        Bazat pe adaptarea algoritmului original_pike.yml pentru embedded security.
-        """
+        """Calculeaza scorul de securitate pentru intregul sistem."""
         self.logger.info(f"Incepe calculul pentru {csv_file}")
         
         try:
@@ -97,12 +81,8 @@ class EmbeddedSecurityCalculator:
             axis=1
         )
         
-        # Calcularea PDCI pentru fiecare pachet (bonus)
-        df['PDCI'] = self.calculate_pdci(df)
-        
         # Calcularea scorului global al sistemului
         system_score = df['Package_Score'].mean()
-        weighted_score = self.apply_criticality_weights(df)
         
         # Identificarea pachetelor critice
         critical_packages = df[df['Package_Score'] < self.config["thresholds"]["critical_score"]]
@@ -111,7 +91,6 @@ class EmbeddedSecurityCalculator:
         
         results = {
             'system_score': round(system_score, 1),
-            'weighted_score': round(weighted_score, 1),
             'total_packages': len(df),
             'critical_packages': len(critical_packages),
             'vulnerable_packages': len(vulnerable_packages),
@@ -124,29 +103,6 @@ class EmbeddedSecurityCalculator:
         
         self.logger.info(f"Calculul finalizat: Scor sistem = {results['system_score']}")
         return results
-    
-    def calculate_pdci(self, df):
-        """Calculeaza Package Dependency Criticality Index."""
-        # Simulam calculul dependintelor (in practica ar veni din package manager)
-        np.random.seed(42)  # Pentru rezultate consistente
-        dependencies = np.random.randint(0, 50, len(df))
-        usage_freq = np.random.randint(0, 100, len(df))
-        max_usage = usage_freq.max() if len(usage_freq) > 0 else 1
-        
-        bonus_config = self.config["bonus_factors"]
-        pdci = (
-            np.log2(1 + dependencies) * bonus_config["dependency_weight"] +
-            (usage_freq / max_usage) * bonus_config["usage_weight"]
-        )
-        
-        return pdci
-    
-    def apply_criticality_weights(self, df):
-        """Aplica ponderi bazate pe criticalitatea pachetelor."""
-        # Pachete cu PDCI ridicat primesc ponderi mai mari
-        weights = 1 + (df['PDCI'] / df['PDCI'].max())
-        weighted_scores = df['Package_Score'] * weights
-        return weighted_scores.sum() / weights.sum()
     
     def calculate_statistics(self, df):
         """Calculeaza statistici descriptive."""
@@ -249,7 +205,7 @@ def main():
     # Initializare calculator
     calculator = EmbeddedSecurityCalculator()
     
-    # Nume fisier CSV real - cel cu datele tale
+    # Nume fisier CSV real
     csv_file = 'package-analysis_agl-demo-platform_raspberrypi4-64.csv'
     
     # Verifica daca fisierul CSV exista
@@ -269,7 +225,6 @@ def main():
         print("REZULTATE ANALIZA SECURITATE AGL DEMO PLATFORM")
         print("="*50)
         print(f"Scor sistem: {results['system_score']}/100 (Nota: {results['grade']})")
-        print(f"Scor ponderat: {results['weighted_score']}/100")
         print(f"Total pachete analizate: {results['total_packages']:,}")
         print(f"Pachete critice (scor < 30): {results['critical_packages']}")
         print(f"Pachete vulnerabile (CVE=0): {results['vulnerable_packages']}")

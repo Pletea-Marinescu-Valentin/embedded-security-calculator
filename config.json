@@ -5,13 +5,6 @@
         "static_analysis": 0.20,
         "dynamic_analysis": 0.15
     },
-    "bonus_factors": {
-        "dependency_weight": 0.6,
-        "usage_weight": 0.4,
-        "temporal_decay": 0.1,
-        "license_risk_enabled": true,
-        "component_interaction_enabled": false
-    },
     "thresholds": {
         "critical_score": 30,
         "warning_score": 60,
@@ -26,11 +19,11 @@
     "validation": {
         "min_packages": 10,
         "required_metrics": [
-        "CVE Analysis Safety",
-        "Code Coverage",
-        "Static Code Analysis Status",
-        "Dynamic Program Analysis Status"
-    ]
+            "CVE Analysis Safety",
+            "Code Coverage",
+            "Static Code Analysis Status",
+            "Dynamic Program Analysis Status"
+        ]
     },
     "display": {
         "show_worst_packages": 10,

@@ -145,7 +145,7 @@ class HTMLReportGenerator:
             <h2>Scor General Securitate</h2>
             <div class="score-big">{results['system_score']}/100</div>
             <div class="grade grade-{results['grade']}">{results['grade']}</div>
-            <p>Scor ponderat cu criticalitate: {results['weighted_score']}/100</p>
+            <p>Media simpla bazata pe datele reale din CSV</p>
         </div>
         
         <div class="stats-grid">
@@ -209,7 +209,7 @@ class HTMLReportGenerator:
         html_content += """
         </table>
         
-        <h2>Recomandări Prioritizate</h2>
+        <h2>Recomandari Prioritizate</h2>
         """
         
         # Adauga recomandari
@@ -224,7 +224,7 @@ class HTMLReportGenerator:
             html_content += f"""
         <div class="recommendations {priority_class}">
             <h3>{i}. Prioritate {rec['priority']}</h3>
-            <p><strong>Acțiune:</strong> {rec['action']}</p>
+            <p><strong>Actiune:</strong> {rec['action']}</p>
             <p><strong>Impact:</strong> {rec['impact']}</p>
         </div>
             """
@@ -263,9 +263,9 @@ class HTMLReportGenerator:
         # Footer
         html_content += f"""
         <div class="footer">
-            <p>Raport generat de Security Calculator v1.0</p>
+            <p>Raport generat de Security Calculator v2.0 (Clean Version)</p>
             <p>Bazat pe analiza {results['total_packages']:,} pachete din {csv_file}</p>
-            <p>Formula adaptată din OpenSSF Criticality Score pentru embedded security</p>
+            <p>Formula simpla: CVE×0.4 + Coverage×0.25 + Static×0.2 + Dynamic×0.15</p>
         </div>
     </div>
 </body>
